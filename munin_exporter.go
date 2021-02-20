@@ -172,7 +172,7 @@ func muninCommand(cmd string) (reader *bufio.Reader, err error) {
 }
 
 func muninList() (items []string, err error) {
-	munin, err := muninCommand("list")
+	munin, err := muninCommand("list " + hostname)
 	if err != nil {
 		rootLogger.Warningf("couldn't get list")
 		return
