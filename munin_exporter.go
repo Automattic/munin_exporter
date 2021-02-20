@@ -16,6 +16,7 @@ import (
 	"runtime"
 	"github.com/juju/loggo"
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 var logger = loggo.GetLogger("main")
@@ -107,7 +108,7 @@ func init() {
 }
 
 func serveStatus() {
-	prom := prometheus.Handler()
+	prom := promhttp.Handler()
 	http.HandleFunc(*listeningPath, func(res http.ResponseWriter, req *http.Request){
 		wg.Wait();
 		prom.ServeHTTP(res, req)
